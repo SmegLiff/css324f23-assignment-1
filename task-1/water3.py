@@ -31,7 +31,7 @@ def successors(s):
         if t > 0:
             yield (x, max(0, y - t), z + min(y, t)), min(y, t)
 
-    # Pouring from y
+    # Pouring from z
     if z > 0:
         # z to x
         t = 8 - x
