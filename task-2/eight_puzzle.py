@@ -48,14 +48,14 @@ def h1(s):
             res += 1
     return res
 
-def h3(s):
+def h3(s): #manhattan 
     # implement this function
     goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
     board, _, _ = s
     res = 0
     for idx in range(1, 9):
-        if (goalrow := (goal[idx] - 1) // 3) != (boardrow := (board[idx]-1) // 3): # Different row
-            res += abs(goalrow - boardrow)
-        if (goalcol := goal[idx] % 3) != (boardcol := board[idx] % 3): # Different column
-            res += abs(goalcol - boardcol)
+        if board[idx] != 0:  # Ignore blank space 0
+            goalrow, goalcol = divmod(goal.index(board[idx]), 3)
+            boardrow, boardcol = divmod(idx, 3)
+            res += abs(goalrow - boardrow) + abs(goalcol - boardcol)
     return res

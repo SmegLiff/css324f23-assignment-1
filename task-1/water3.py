@@ -4,7 +4,7 @@ def initial_state():
 
 def is_goal(s):
     a, b, c = s
-    return a == 4 and b == 4
+    return a == 4 and b == 4 # and c == 3 just test case
 
 
 def successors(s):
