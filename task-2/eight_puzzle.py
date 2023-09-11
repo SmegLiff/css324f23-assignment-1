@@ -43,7 +43,7 @@ def h1(s):
     # The for loop counts the number of elements that is different from
     # the goal configuration.
     # We start from index 1 to 8 because the blank is excluded.
-    for idx in range(1, 9):
+    for idx in range(0, 9):
         if goal[idx] != board[idx]:
             res += 1
     return res
@@ -53,9 +53,17 @@ def h3(s): #manhattan
     goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
     board, _, _ = s
     res = 0
-    for idx in range(1, 9):
+    for idx in range(0, 9):
         if board[idx] != 0:  # Ignore blank space 0
+            # Let idx = 2 board[2] = 4
             goalrow, goalcol = divmod(goal.index(board[idx]), 3)
+            # divmod(goal.index(4),3) = divmod(3,3) return 1,0; 4 must be placed at 1,0
             boardrow, boardcol = divmod(idx, 3)
-            res += abs(goalrow - boardrow) + abs(goalcol - boardcol)
+            # ex divmod(2,3) return 0,2; now initial 4 is at 0,2
+            # idx = 2 has wrong row and col
+            if boardrow != goalrow: 
+                res += 1 # wrong row then res += 1
+            if boardcol != goalcol:
+                res += 1 # wrong col then res += 1 # give out 638 visited states
+            #res += abs(goalrow - boardrow) + abs(goalcol - boardcol) # manhattan give out 124 visited states
     return res
